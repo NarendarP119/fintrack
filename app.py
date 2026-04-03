@@ -26,7 +26,7 @@ import jwt
 # App & Config
 # ──────────────────────────────────────────────────────────────
 app = Flask(__name__, static_folder="static")
-init_db()
+
 SECRET_KEY      = os.environ.get("SECRET_KEY", "fintrack_dev_secret_2024")
 DB_PATH         = os.environ.get("DB_PATH", "fintrack.db")
 TOKEN_EXP_HOURS = int(os.environ.get("TOKEN_EXP_HOURS", 24))
@@ -611,3 +611,5 @@ if __name__ == "__main__":
     print("  viewer@fintrack.com   / viewer123   (Viewer)")
     print("─" * 46 + "\n")
     app.run(debug=True, port=5000)
+with app.app_context():
+    init_db()
