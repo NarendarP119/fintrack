@@ -610,6 +610,10 @@ if __name__ == "__main__":
     print("  analyst@fintrack.com  / analyst123  (Analyst)")
     print("  viewer@fintrack.com   / viewer123   (Viewer)")
     print("─" * 46 + "\n")
-    app.run(debug=True, port=5000)
-with app.app_context():
-    init_db()
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
+try:
+    with app.app_context():
+        init_db()
+except Exception as e:
+    print("DB Init Error:", e)
